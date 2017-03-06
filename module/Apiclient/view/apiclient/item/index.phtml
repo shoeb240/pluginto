@@ -1,0 +1,68 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Item</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'item', 'action'=>'add'));?>">Add Item</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($items)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Pluginto Item Id</div>
+                        <div class="columnDiv small">Vendor Item Id</div>
+                        <div class="columnDiv small">User Id</div>
+                        <div class="columnDiv big">Item Name</div>
+                        <div class="columnDiv big">Item Type</div>
+                        <div class="columnDiv small">Income<br /> Account</div>
+                        <div class="columnDiv small">Expense<br /> Account</div>
+                        <div class="columnDiv big">Description</div>
+                        <div class="columnDiv big">Price</div>
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($items as $item): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo !empty($item['id']) ? $item['id'] : ''; ?></div>
+                        <div class="columnDiv small"><?php echo $item['vendor_item_id']; ?></div>
+                        <div class="columnDiv small"><?php echo !empty($item['user_id']) ? $item['user_id'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $item['item_name']; ?></div>
+                        <div class="columnDiv big"><?php echo $item['item_type']; ?>&nbsp;</div>
+                        <div class="columnDiv small"><?php echo $item['income_account_id']; ?>&nbsp;</div>
+                        <div class="columnDiv small"><?php echo $item['expense_account_id']; ?>&nbsp;</div>
+                        <div class="columnDiv big"><?php echo $item['description']; ?></div>
+                        <div class="columnDiv big"><?php echo $item['price']; ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url(null, array('controller' => 'item', 'action'=>'edit', 'id' => $item['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url(null, array('controller' => 'item', 'action'=>'delete', 'id' => $item['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Pluginto '. $this->translate('Inc.'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+        <?php echo $this->headStyle() ?>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+<!--                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+                </div>-->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'user', 'action' => 'index')) ?>"><?php echo $this->translate('User') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'customer', 'action' => 'index')) ?>"><?php echo $this->translate('Customer') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'supplier', 'action' => 'index')) ?>"><?php echo $this->translate('Supplier') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'account', 'action' => 'index')) ?>"><?php echo $this->translate('Account') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'item', 'action' => 'index')) ?>"><?php echo $this->translate('Item') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'bank-account', 'action' => 'index')) ?>"><?php echo $this->translate('Bank<br />Account') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'tax-agency', 'action' => 'index')) ?>"><?php echo $this->translate('Tax<br />Agency') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'tax', 'action' => 'index')) ?>"><?php echo $this->translate('Tax') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'tax-rate', 'action' => 'index')) ?>"><?php echo $this->translate('Tax<br />Rate') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'default', 'action' => 'index')) ?>"><?php echo $this->translate('Default<br />Entity') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'sync', 'action' => 'index')) ?>"><?php echo $this->translate('Sync.') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'transaction', 'action' => 'index')) ?>"><?php echo $this->translate('Transaction<br />Request') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'service', 'action' => 'index')) ?>"><?php echo $this->translate('Transaction<br />(Services)') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'report', 'action' => 'index')) ?>"><?php echo $this->translate('Reports') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'bulk', 'action' => 'index')) ?>"><?php echo $this->translate('Bulk') ?></a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; 2013 - <?php echo date('Y') ?> by PlugInto. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

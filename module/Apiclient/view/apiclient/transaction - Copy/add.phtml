@@ -1,0 +1,106 @@
+<?php
+$title = 'Add New Transaction';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Company Id:</div>
+        <div class="fieldBox">
+            <select name="company_id">
+                <option value="">Select</option>
+                <?php foreach($companies as $company): ?>
+                    <option value="<?php echo $company->getId(); ?>"><?php echo $company->getCompanyName() . ' (' . $company->getCompanyType() . ') - uid' . $company->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+<!--    <div class="fieldRow">
+        <div class="labelBox">User Id:</div>
+        <div class="fieldBox">
+            <select name="user_id">
+                <option value="">Select</option>
+                <?php foreach($users as $user): ?>
+                    <option value="<?php echo $user->getId(); ?>"><?php echo $user->getId() . ' - ' . $user->getUserLogin(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>-->
+    <div class="fieldRow">
+        <div class="labelBox">Account Id:</div>
+        <div class="fieldBox">
+            <select name="account_id">
+                <option value="">Select</option>
+                <?php foreach($accounts as $account): ?>
+                    <option value="<?php echo $account->getId(); ?>"><?php echo $account->getName() . ' (' . $account->getAccountType() . ') - uid' . $account->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Amount:</div>
+        <div class="fieldBox"><input type="text" name="amount"> <span style="font-size:10px;">(Positive amount is Sale and negetive amount is Purchase)</span></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Currency:</div>
+        <div class="fieldBox">
+            <select name="currency">
+                <option value="">Select</option>
+                <option value="USD">USD</option>
+                <option value="EURO">EURO</option>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Id:</div>
+        <div class="fieldBox">
+            <select name="tax_id">
+                <option value="">Select</option>
+                <?php foreach($taxes as $tax): ?>
+                    <option value="<?php echo $tax->getId(); ?>"><?php echo $tax->getTaxCode() . ' - uid' . $tax->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Payment Made:</div>
+        <div class="fieldBox">
+            <select name="payment_made">
+                <option value="">Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+            </select>
+        </div>
+    </div>
+     <div class="fieldRow">
+        <div class="labelBox">Payment Type:</div>
+        <div class="fieldBox">
+            <select name="payment_type">
+                <option value="">Select</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Check">Check</option>
+            </select>
+        </div>
+    </div>
+    <div><input type="submit" value="Submit"></div>
+</form>

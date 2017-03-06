@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<fields>
+		<customer_name></customer_name>
+		<supplier_name></supplier_name>
+		<amount></amount>
+		<transaction_description></transaction_description>
+		<currency></currency>
+		<account_name_financial></account_name_financial>
+		<bank_account_id></bank_account_id>
+		<payment_made></payment_made>
+		<payment_type></payment_type>
+		<account_name>account_code</account_name>
+		<account_category name="AAA">main_category</account_category>
+		<account_subcategory>sub_category</account_subcategory>
+		<item_name></item_name>
+		<description>comments</description>
+		<quantity></quantity>
+		<unit_price>amount</unit_price>
+		<tax_percentage></tax_percentage>
+		<discount_percentage></discount_percentage>
+		<tax></tax>
+		<discount></discount>
+		<tax_amount_total></tax_amount_total>
+		<discount_percent_total>cname</discount_percent_total>
+		<due_date>payment_date</due_date>
+		<txn_date>posting_date</txn_date>
+	</fields>
+	<accounts>
+		<account>
+			<category>
+				<pms>asset</pms>
+				<qb>Other Current Assets</qb>
+			</category>
+			<subcategory>
+				<pms>computer equipment</pms>
+				<qb>Inventory</qb>
+			</subcategory>
+			<subcategory>
+				<pms>other credit, deposit or guarantee</pms>
+				<qb>OtherCurrentAssets</qb>
+			</subcategory>
+			<subcategory>
+				<pms>capital transfer</pms>
+				<qb>OtherCurrentAssets</qb>
+			</subcategory>
+		</account>		
+		<account>
+			<category>
+				<pms>admin/financial</pms>
+				<qb>Expenses</qb>
+			</category>
+			<subcategory>
+				<pms>office rental</pms>
+				<qb>Rent or lease of buildings</qb>
+			</subcategory>
+			<subcategory>
+				<pms>bank charges</pms>
+				<qb>Bank charges</qb>
+			</subcategory>
+			<subcategory>
+				<pms>travel expenses</pms>
+				<qb>Travel</qb>
+			</subcategory>
+			<subcategory>
+				<pms>printing &amp; stationery</pms>
+				<qb>OfficeGeneralAdministrativeExpenses</qb>
+			</subcategory>
+			<subcategory>
+				<pms>training &amp; seminar</pms>
+				<qb>Advertising/promotional</qb>
+			</subcategory>
+		</account>		
+		<account>
+			<category>
+				<pms>marketing</pms>
+				<qb>Other Expense</qb>
+			</category>
+			<subcategory>
+				<pms>web content, seo &amp; smo</pms>
+				<qb>Other miscellaneous expense</qb>
+			</subcategory>
+			<subcategory>
+				<pms>domain name</pms>
+				<qb>Other miscellaneous expense</qb>
+			</subcategory>
+			<subcategory>
+				<pms>web &amp; graphic design</pms>
+				<qb>Other miscellaneous expense</qb>
+			</subcategory>
+			<subcategory>
+				<pms>bookings commission (third party)</pms>
+				<qb>Other miscellaneous expense</qb>
+			</subcategory>
+		</account>		
+		<account>
+			<category>
+				<pms>employee</pms>
+				<qb>Other Expense</qb>
+			</category>
+			<subcategory>
+				<pms>salaries</pms>
+				<qb>Payroll expenses</qb>
+			</subcategory>
+			<subcategory>
+				<pms>visa and work permit</pms>
+				<qb>Legal &amp; professional fees</qb>
+			</subcategory>
+		</account>		
+		<account>
+			<category>
+				<pms>government taxes</pms>
+				<qb>Expenses</qb>
+			</category>
+			<subcategory>
+				<pms>other tax</pms>
+				<qb>Taxes paid</qb>
+			</subcategory>
+		</account>		
+		<account>
+			<category>
+				<pms>utilities</pms>
+				<qb>Expenses</qb>
+			</category>
+			<subcategory>
+				<pms>telecommunications</pms>
+				<qb>Utilities</qb>
+			</subcategory>
+		</account>
+	</accounts>	
+</data>

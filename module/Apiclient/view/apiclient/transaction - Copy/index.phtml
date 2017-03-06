@@ -1,0 +1,63 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Transaction</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'transaction', 'action'=>'add'));?>">Add Transaction</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($transactions)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv medium">Id</div>
+                        <div class="columnDiv big">Company Id</div>
+                        <div class="columnDiv big">Account Id</div>
+                        <div class="columnDiv medium">Amount</div>
+                        <div class="columnDiv medium">Currency</div>
+                        <div class="columnDiv big">Tax Id</div>
+                        <div class="columnDiv big">Date</div>
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($transactions as $transaction): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv medium"><?php echo $transaction['id']; ?></div>
+                        <div class="columnDiv big"><?php echo $transaction['company_id']; ?></div>
+                        <div class="columnDiv big"><?php echo $transaction['account_id']; ?></div>
+                        <div class="columnDiv medium"><?php echo $transaction['amount']; ?></div>
+                        <div class="columnDiv medium"><?php echo $transaction['currency']; ?></div>
+                        <div class="columnDiv big"><?php echo $transaction['tax_id']; ?></div>
+                        <div class="columnDiv big"><?php echo $transaction['date']->format('Y-m-d'); ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url(null, array('controller' => 'transaction', 'action'=>'edit', 'id' => $transaction['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url(null, array('controller' => 'transaction', 'action'=>'delete', 'id' => $transaction['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

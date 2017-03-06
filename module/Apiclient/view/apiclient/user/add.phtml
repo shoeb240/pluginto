@@ -1,0 +1,73 @@
+<?php
+$title = 'Add New User';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Accounting Vendor:</div>
+        <div class="fieldBox">
+            <select name="accounting_vendor">
+                <option value="Qb">Qb</option>
+                <option value="Sage">Sage</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="fieldRow">
+        <div class="labelBox">User Login:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="user_login"></div>
+        </div>
+    </div>
+    
+    <div class="fieldRow">
+        <div class="labelBox">User Password:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="user_password"></div>
+        </div>
+    </div>
+    
+    <div class="fieldRow">
+        <div class="labelBox">Vendor Api Key:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="vendor_api_key"> <span style="font-size:9px">(for SageOne)</span> </div>
+        </div>
+    </div>
+    
+    <div class="fieldRow">
+        <div class="labelBox">Vendor Password:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="vendor_password"> <span style="font-size:9px">(for SageOne)</span> </div> 
+        </div>
+    </div>
+    
+    <div class="fieldRow">
+        <div class="labelBox">Vendor Company Id:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="vendor_company_id"> <span style="font-size:9px">(for SageOne)</span> </div>
+        </div>
+    </div>
+
+    <div><input type="submit" value="Submit"></div>
+</form>

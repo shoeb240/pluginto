@@ -1,0 +1,62 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Default Entity</h3>
+            </div>
+            <div>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <div  style="clear:both;">
+                    <div class="columnDiv" style="font-weight: bold;">
+                        Synchronize Entities:
+                    </div>
+                    <div class="columnDiv" style="clear:both;">
+                        <a target="_blank" href="<?php echo $this->url('sync-action', array('controller' => 'sync', 'action'=>'account'), array('query' => array('access_token' => $access_token)));?>">Account</a>
+                    </div>
+<!--                    <div class="columnDiv" style="clear:both;">
+                        <a target="_blank" href="<?php echo $this->url('sync-action', array('controller' => 'sync', 'action'=>'company'), array('query' => array('access_token' => $access_token)));?>">Company</a>
+                    </div>-->
+                    <div class="columnDiv" style="clear:both;">
+                        <a target="_blank" href="<?php echo $this->url('sync-action', array('controller' => 'sync', 'action'=>'item'), array('query' => array('access_token' => $access_token)));?>">Item</a>
+                    </div>
+<!--                    <div class="columnDiv" style="clear:both;">
+                        <a target="_blank" href="<?php echo $this->url('sync-action', array('controller' => 'sync', 'action'=>'service'), array('query' => array('access_token' => $access_token)));?>">Service</a>
+                    </div>
+                    <div class="columnDiv" style="clear:both;">
+                        <a target="_blank" href="<?php echo $this->url('sync-action', array('controller' => 'sync', 'action'=>'tax'), array('query' => array('access_token' => $access_token)));?>">Tax</a>
+                    </div>
+                    <div class="columnDiv" style="clear:both;">
+                        <a target="_blank" href="<?php echo $this->url('sync-action', array('controller' => 'sync', 'action'=>'tax-agency'), array('query' => array('access_token' => $access_token)));?>">Tax Agency</a>
+                    </div>
+                    <div class="columnDiv" style="clear:both;">
+                        <a target="_blank" href="<?php echo $this->url('sync-action', array('controller' => 'sync', 'action'=>'tax-rate'), array('query' => array('access_token' => $access_token)));?>">Tax Rate</a>
+                    </div>-->
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Bulk Transaction</h3>
+            </div>
+            <div>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <div class="fieldRow">
+                    <div class="fieldBox" style="font-weight: bold;">Check List:</div>
+                    <div class="fieldBox">
+                        1. Create default entities <a target="_blank" href="<?php echo $this->url(null, array('controller' => 'default', 'action'=>'add'));?>">click here</a> <br />
+                    </div>
+                    <div class="fieldBox">
+                        2. Synchronize with accounting application. <a target="_blank" href="<?php echo $this->url(null, array('controller' => 'sync', 'action'=>'index'));?>">click here</a> <br />
+                    </div>
+                    <div class="fieldBox">
+                        3. Upload CSV and XML files. <a href="<?php echo $this->url(null, array('controller' => 'bulk', 'action'=>'add'));?>">Add Bulk Transaction</a>
+                    </div>
+                    <div class="fieldBox">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

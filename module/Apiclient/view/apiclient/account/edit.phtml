@@ -1,0 +1,64 @@
+<?php
+$title = 'Edit Account';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Name:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="name" value="<?php echo $account['name'];?>"></div>
+        </div>
+    </div>
+    <?php
+    if ($accountingVendor == 'Qb') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Account Type:</div>
+        <div class="fieldBox"><input type="text" name="account_type" value="<?php echo $account['account_type'];?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Account Sub Type:</div>
+        <div class="fieldBox"><input type="text" name="account_sub_type" value="<?php echo $account['account_sub_type'];?>"></div>
+    </div>
+    <?php
+    } else if ($accountingVendor == 'Sage') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Category Id:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="category_id" value="<?php echo $account['category_id'];?>"></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Category Description:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="category_description" value="<?php echo $account['category_description'];?>"></div>
+        </div>
+    </div>
+    <?php
+    }
+    ?>
+    <input type="hidden" name="user_id" value="<?php echo $account['user_id'];?>">
+    <input type="submit" value="Submit">
+</form>

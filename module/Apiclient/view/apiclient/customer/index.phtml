@@ -1,0 +1,64 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Customer</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'customer', 'action'=>'add'));?>">Add Customer</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($customers)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Pluginto Customer Id</div>
+                        <div class="columnDiv small">Vendor Customer Id</div>
+                        <div class="columnDiv small">User Id</div>
+                        <div class="columnDiv big">Customer Name</div>
+                        <div class="columnDiv big">Display Name</div>
+                        <div class="columnDiv big">Name</div>
+                        <div class="columnDiv big">Surname</div>
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($customers as $customer): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo !empty($customer['id']) ? $customer['id'] : ''; ?></div>
+                        <div class="columnDiv small"><?php echo $customer['vendor_customer_id']; ?></div>
+                        <div class="columnDiv small"><?php echo !empty($customer['user_id']) ? $customer['user_id'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $customer['customer_name']; ?></div>
+                        <div class="columnDiv big"><?php echo !empty($customer['display_name']) ? $customer['display_name'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $customer['name']; ?></div>
+                        <div class="columnDiv big"><?php echo !empty($customer['surname']) ? $customer['surname'] : ''; ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url(null, array('controller' => 'customer', 'action'=>'edit', 'id' => $customer['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url(null, array('controller' => 'customer', 'action'=>'delete', 'id' => $customer['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

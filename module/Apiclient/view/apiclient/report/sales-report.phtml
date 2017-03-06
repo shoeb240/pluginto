@@ -1,0 +1,537 @@
+<?php $this->headStyle()->captureStart() ?>
+.fieldRow{
+    margin:3px;
+}
+.labelBox{
+    width:200px;
+    float:left;
+}
+.fieldBox{
+    margin:3px;
+}
+
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+.extrabig{
+    width:350px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+<?php 
+    error_reporting(0);
+
+    foreach($reports['grp_data_sales'] as $report){
+        $monthDataSales[$report['month']] = $report['total'];
+    }
+    $sr1 = '';
+    for($i = 1; $i <= 12; $i++) {
+        if ($sr1 != '') $sr1 .= ', ';
+        if (isset($monthDataSales[$i])) { $sr1 .= $monthDataSales[$i];}
+        else { $sr1 .= '0'; }
+    }
+    
+    foreach($reports['grp_data_expenses'] as $report){
+        $monthDataExpenses[$report['month']] = $report['total'];
+    }
+    $sr2 = '';
+    for($i = 1; $i <= 12; $i++) {
+        if ($sr2 != '') $sr2 .= ', ';
+        if (isset($monthDataExpenses[$i])) { $sr2 .= $monthDataExpenses[$i];}
+        else { $sr2 .= '0'; }
+    }
+    //echo $sr2;
+
+    $sr3 = '';
+    $cat3 = '';
+    foreach($reports['grp_data_supplier'] as $report){
+        if ($sr3 != '') $sr3 .= ', ';
+        if ($cat3 != '') $cat3 .= ', ';
+        $cat3 .= "'" . $report['supplier_name'] . "'";
+        $sr3 .= $report['total'];
+    }
+    //echo $sr3;
+    
+    $sr4 = '';
+    $cat4 = '';
+    foreach($reports['grp_data_customer'] as $report){
+        if ($sr4 != '') $sr4 .= ', ';
+        if ($cat4 != '') $cat4 .= ', ';
+        $cat4 .= "'" . $report['customer_name'] . "'";
+        $sr4 .= $report['total'];
+    }
+    //echo $sr4;
+    
+    foreach($reports['grp_data_account'] as $report){
+        $accountServiceTypeTran[$report['name']][$report['service_type']] = $report['total'];
+    }
+    $cat5 = '';
+    $sr5 = '';
+    $sr6 = '';
+    foreach($accountServiceTypeTran as $account => $serviceTypeTran){
+        if ($cat5 != '') $cat5 .= ', ';
+        $cat5 .= "'" . $account . "'";
+        if ($sr5 != '') $sr5 .= ', ';
+        if ($sr6 != '') $sr6 .= ', ';
+        $purTot = 0;
+        $incTot = 0;
+        foreach($serviceTypeTran as $serviceType => $total){
+            if ($serviceType == 'Purchase' || $serviceType == 'SupplierPayment') {
+                $purTot += $total;
+            } 
+            if ($serviceType == 'SalesReceipt' || $serviceType == 'CustomerReceipt') {
+                $incTot += $total;
+            }
+        }
+        $sr5 .= $purTot;
+        $sr6 .= $incTot;
+    }
+    
+    foreach($reports['grp_data_item'] as $report){
+        $itemServiceTypeTran[$report['name']][$report['service_type']] = $report['total'];
+    }
+    $cat7 = '';
+    $sr7 = '';
+    $sr8 = '';
+    foreach($itemServiceTypeTran as $item => $serviceTypeTran){
+        if ($cat7 != '') $cat7 .= ', ';
+        $cat7 .= "'" . $item . "'";
+        if ($sr7 != '') $sr7 .= ', ';
+        if ($sr8 != '') $sr8 .= ', ';
+        $purTot = 0;
+        $incTot = 0;
+        foreach($serviceTypeTran as $serviceType => $total){
+            if ($serviceType == 'Purchase' || $serviceType == 'SupplierPayment') {
+                $purTot += $total;
+            } 
+            if ($serviceType == 'SalesReceipt' || $serviceType == 'CustomerReceipt') {
+                $incTot += $total;
+            }
+        }
+        $sr7 .= $purTot;
+        $sr8 .= $incTot;
+    }
+//    echo $cat7 . '<br />';
+//    echo $sr7 . '<br />';
+//    echo $sr8 . '<br />';
+?>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Monthly Total Transaction'
+        },
+        subtitle: {
+            text: 'Transaction'
+        },
+        xAxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Amount (Dollar)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Sales',
+            data: [<?php echo $sr1;?>]
+
+        }, {
+            name: 'Expenses',
+            data: [<?php echo $sr2;?>]
+
+        }]
+    });
+    
+    
+    $('#container_supplier').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Expenses By Supplier'
+        },
+        subtitle: {
+            text: 'Expenses'
+        },
+        xAxis: {
+            categories: [
+                <?php echo $cat3;?>
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Amount (Dollar)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Expenses',
+            data: [<?php echo $sr3;?>]
+
+        }]
+    });
+    
+    
+    $('#container_customer').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Sales By Customer'
+        },
+        subtitle: {
+            text: 'Sales'
+        },
+        xAxis: {
+            categories: [
+                <?php echo $cat4;?>
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Amount (Dollar)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Sales',
+            data: [<?php echo $sr4;?>]
+
+        }]
+    });
+    
+    
+    $('#container_account').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Transaction By Account'
+        },
+        subtitle: {
+            text: 'Transaction'
+        },
+        xAxis: {
+            categories: [
+                <?php echo $cat5;?>
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Amount (Dollar)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Purchase',
+            data: [<?php echo $sr5;?>]
+
+        }, {
+            name: 'Sales',
+            data: [<?php echo $sr6;?>]
+
+        }]
+    });
+    
+    
+    $('#container_item').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Transaction By Item'
+        },
+        subtitle: {
+            text: 'Transaction'
+        },
+        xAxis: {
+            categories: [
+                <?php echo $cat7;?>
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Amount (Dollar)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Purchase',
+            data: [<?php echo $sr7;?>]
+
+        }, {
+            name: 'Sales',
+            data: [<?php echo $sr8;?>]
+
+        }]
+    });
+    
+    
+});
+
+</script>
+
+<div>
+    <div style="clear:both; margin-top: 10px;">
+        <h3>Transaction Report</h3>
+        <h5>As of <?php echo date("F j,Y");?></h5>
+    </div>
+    
+    <div style="float: left;  width: 100%; border: 1px solid #c1c1c1; margin-bottom: 2px;">
+        <div id="container" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+    </div>    
+
+    <div style="clear:both;">&nbsp;</div>
+    
+    <div style="float: left;  width: 50%; border: 1px solid #c1c1c1; margin-bottom: 2px;">
+        <div id="container_supplier" style="min-width: 310px; height: 300px; margin: 0 auto;"></div>
+    </div>
+
+    <div style="float: right;  width: 49%; border: 1px solid #c1c1c1; margin-bottom: 2px;">
+        <div id="container_customer" style="min-width: 310px; height: 300px; margin: 0 auto;"></div>
+    </div>
+    
+    <div style="clear:both;">&nbsp;</div>
+    
+    <div style="float: left;  width: 50%; border: 1px solid #c1c1c1; margin-bottom: 2px;">
+        <div id="container_account" style="min-width: 310px; height: 300px; margin: 0 auto;"></div>
+    </div>
+    
+    <div style="float: right;  width: 49%; border: 1px solid #c1c1c1; margin-bottom: 2px;">
+        <div id="container_item" style="min-width: 310px; height: 300px; margin: 0 auto;"></div>
+    </div>
+
+    <div style="clear:both;">&nbsp;</div>
+    
+    
+    <h3 style="margin-top: 20px;">Report Data</h3>
+
+    
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+                
+    <div style="margin-top:20px;margin-bottom:20px;border: 1px solid #c1c1c1;padding: 7px; width: 100%;">                
+        <form method="post" action="">
+            <div class="fieldRow">
+                <div class="labelBox">Transaction Type:</div>
+                <div class="fieldBox">
+                    <div class="fieldBox">
+                        <select name="service_type">
+                            <option value="">All</option>
+                            <option <?php echo "SalesReceipt" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="SalesReceipt">SalesReceipt</option>
+                            <option <?php echo "Invoice" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="Invoice">Invoice</option>
+                            <option <?php echo "Bill" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="Bill">Bill</option>
+                            <option <?php echo "Purchase" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="Purchase">Purchase</option>
+                            <option <?php echo "TaxInvoice" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="TaxInvoice">TaxInvoice</option>
+                            <option <?php echo "SupplierInvoice" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="SupplierInvoice">SupplierInvoice</option>
+                            <option <?php echo "CustomerReceipt" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="CustomerReceipt">CustomerReceipt</option>
+                            <option <?php echo "SupplierPayment" == $_POST['service_type'] ? 'selected="selected"' : ''; ?> value="SupplierPayment">SupplierPayment</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fieldRow">
+                <div class="labelBox">Customer Id:</div>
+                <div class="fieldBox">
+                    <select name="customer_id">
+                        <option value="">Customer</option>
+                        <?php foreach($customers as $customer): ?>
+                        <option <?php echo $customer->getVendorCustomerId() == $_POST['customer_id'] ? 'selected="selected"' : ''; ?> value="<?php echo $customer->getVendorCustomerId(); ?>"><?php echo $customer->getCustomerName() . ' - uid' . $customer->getUserId(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="fieldRow">
+                <div class="labelBox">Supplier Id:</div>
+                <div class="fieldBox">
+                    <select name="supplier_id">
+                        <option value="">Supplier</option>
+                        <?php foreach($suppliers as $supplier): ?>
+                            <option <?php echo $supplier->getVendorSupplierId() == $_POST['supplier_id'] ? 'selected="selected"' : ''; ?> value="<?php echo $supplier->getVendorSupplierId(); ?>"><?php echo $supplier->getSupplierName() . ' - uid' . $supplier->getUserId(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fieldRow">
+                <div class="labelBox">Item Id:</div>
+                <div class="fieldBox">
+                    <select name="item_id" style="width:140px;">
+                        <option value="">Item</option>
+                        <?php foreach($items as $item): ?>
+                            <option <?php echo $item->getVendorItemId() == $_POST['item_id'] ? 'selected="selected"' : ''; ?> value="<?php echo $item->getVendorItemId(); ?>"><?php echo $item->getItemName() . ' (' . $item->getPrice() . ') - uid' . $item->getUserId(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fieldRow">
+                <div class="labelBox">Account Id:</div>
+                <div class="fieldBox">
+                    <select name="account_id" style="width:140px;">
+                        <option value="">Account</option>
+                        <?php foreach($accounts as $account): ?>
+                            <option <?php echo $account->getVendorAccountId() == $_POST['account_id'] ? 'selected="selected"' : ''; ?> value="<?php echo $account->getVendorAccountId(); ?>"><?php echo $account->getName() . ' (' . $account->getAccountType() . ') - uid' . $account->getUserId(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+
+            <div><input type="submit" value="Submit"></div>
+        </form>
+    </div>      
+    
+    
+    <?php if (isset($reports)) : ?>
+    <div  style="clear:both;font-weight: bold;">
+            <div class="columnDiv big">Service Type</div>
+            <div class="columnDiv small">Id</div>
+            <div class="columnDiv big">Vendor Service Id</div>
+            <div class="columnDiv big">Transaction Id</div>
+            <div class="columnDiv big">Doc Number</div>
+            <div class="columnDiv big">Total Amount</div>
+            <div class="columnDiv big">Txn Date</div>
+            <div class="columnDiv big">&nbsp;</div>
+    </div>
+    <?php 
+    foreach($reports['table_data'] as $report): 
+        if (isset($report['vendor_service_id'])):
+    ?>
+    <div style="clear:both">
+        <div class="columnDiv big"><?php echo $report['service_type']; ?></div>
+        <div class="columnDiv small"><?php echo $report['id']; ?></div>
+        <div class="columnDiv big"><?php echo $report['vendor_service_id']; ?></div>
+        <div class="columnDiv big"><?php echo $report['transaction_id']; ?></div>
+        <div class="columnDiv big"><?php echo $report['doc_number']; ?></div>
+        <div class="columnDiv big"><?php echo $report['total_amt']; ?></div>
+        <div class="columnDiv big"><?php echo $report['txn_date']; ?></div>
+        <div class="columnDiv">
+            <a href="<?php echo $this->url(null, array('controller' => 'service', 'action'=>'view', 'id' => $report['id']));?>">View</a>
+        </div>
+    </div>
+    <?php 
+        endif;
+    endforeach; 
+    ?>
+    <?php endif; ?>
+    <div style="clear:both"></div>
+</div>
+</div>

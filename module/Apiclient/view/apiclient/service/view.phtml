@@ -1,0 +1,85 @@
+<?php
+$title = 'View Transaction Enrolled (Services)';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+        clear:both;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+    .big_div{
+        float:left; 
+        width: 200px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<div  style="clear:both;font-weight: bold;">
+    <?php 
+    if (isset($error_msg)) { 
+        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+    } 
+    ?>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Id:</div>
+    <div class="fieldBox">
+        <?php echo $service['id']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Vendor Service Id:</div>
+    <div class="fieldBox">
+        <?php echo $service['vendor_service_id']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Transaction Id:</div>
+    <div class="fieldBox">
+        <?php echo $service['transaction_id']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Doc Number:</div>
+    <div class="fieldBox">
+        <?php echo $service['doc_number']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Service Type:</div>
+    <div class="fieldBox">
+        <?php echo $service['service_type']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Total Amt:</div>
+    <div class="fieldBox">
+        <?php echo $service['total_amt']; ?>&nbsp;
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="fieldRow">
+    <div class="fieldBox">
+        <div class="big_div">Id</div>
+        <div class="big_div">Description</div>
+        <div class="big_div">Amount</div>
+    </div>
+</div>
+<?php foreach($service['Line'] as $line):?>
+<div class="fieldRow">
+    <div class="fieldBox">
+        <div class="big_div"><?php echo $line['id']; ?>&nbsp;</div>
+        <div class="big_div"><?php echo $line['description']; ?>&nbsp;</div>
+        <div class="big_div"><?php echo $line['amount']; ?>&nbsp;</div>
+    </div>
+</div>
+<?php endforeach;?>
+<div style="clear:both;"></div>

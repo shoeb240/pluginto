@@ -1,0 +1,51 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Default Entity</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'default', 'action'=>'add'));?>">Add Default Entity</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($user['default_entity_list'])) : ?>
+                <div  style="clear:both;">
+                    <div class="columnDiv" style="font-weight: bold;">
+                        Created Default Entities:
+                    </div>
+                    <div class="columnDiv" style="clear:both;">
+                        <?php
+                        foreach($user['default_entity_list'] as $en) {
+                            if (!empty($en)) echo $en . '<br />';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

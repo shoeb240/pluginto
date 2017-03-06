@@ -1,0 +1,64 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;    
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Supplier</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'supplier', 'action'=>'add'));?>">Add Supplier</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($companies)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Pluginto Supplier Id</div>
+                        <div class="columnDiv small">Vendor Supplier Id</div>
+                        <div class="columnDiv small">User Id</div>
+                        <div class="columnDiv big">Supplier Name</div>
+                        <div class="columnDiv big">Display Name</div>
+                        <div class="columnDiv big">Name</div>
+                        <div class="columnDiv big">Surname</div>
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($companies as $supplier): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo !empty($supplier['id']) ? $supplier['id'] : ''; ?></div>
+                        <div class="columnDiv small"><?php echo $supplier['vendor_supplier_id']; ?></div>
+                        <div class="columnDiv small"><?php echo !empty($supplier['user_id']) ? $supplier['user_id'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $supplier['supplier_name']; ?></div>
+                        <div class="columnDiv big"><?php echo !empty($supplier['display_name']) ? $supplier['display_name'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $supplier['name']; ?></div>
+                        <div class="columnDiv big"><?php echo !empty($supplier['surname']) ? $supplier['surname'] : ''; ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url(null, array('controller' => 'supplier', 'action'=>'edit', 'id' => $supplier['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url(null, array('controller' => 'supplier', 'action'=>'delete', 'id' => $supplier['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

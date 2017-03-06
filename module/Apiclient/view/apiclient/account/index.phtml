@@ -1,0 +1,69 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+.extrabig{
+    width:200px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Account</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'account', 'action'=>'add'));?>">Add Account</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($companies)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Pluginto Account Id</div>
+                        <div class="columnDiv small">Vendor Account Id</div>
+                        <div class="columnDiv small">User Id</div>
+                        <div class="columnDiv big">Name</div>
+                        <div class="columnDiv extrabig">Account Type</div>
+                        <div class="columnDiv extrabig">Account Sub Type</div>
+                        <div class="columnDiv small">Category Id</div>
+                        <div class="columnDiv extrabig">Category<br />Description</div>
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($companies as $account): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo !empty($account['id']) ? $account['id'] : ''; ?></div>
+                        <div class="columnDiv small"><?php echo $account['vendor_account_id']; ?></div>
+                        <div class="columnDiv small"><?php echo !empty($account['user_id']) ? $account['user_id'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $account['name']; ?></div>
+                        <div class="columnDiv extrabig"><?php echo $account['account_type']; ?></div>
+                        <div class="columnDiv extrabig"><?php echo $account['account_sub_type']; ?></div>
+                        <div class="columnDiv small"><?php echo $account['category_id']; ?></div>
+                        <div class="columnDiv extrabig"><?php echo $account['category_description']; ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url(null, array('controller' => 'account', 'action'=>'edit', 'id' => $account['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url(null, array('controller' => 'account', 'action'=>'delete', 'id' => $account['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

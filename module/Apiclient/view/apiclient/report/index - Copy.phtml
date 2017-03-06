@@ -1,0 +1,174 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+.extrabig{
+    width:200px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Accountx</h3>
+            </div>
+            <div>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($reports)) : ?>
+                
+                <?php foreach($reports->Columns->Column as $eachColumn): ?>
+                    <div>
+                        <div class="columnDiv extrabig" style="font-weight:bold;border-bottom: 1px solid grey;"><?php echo $eachColumn->ColTitle; ?>&nbsp;</div>
+                    </div>
+                <?php endforeach; ?>
+                
+                <?php foreach($reports->Rows->Row as $eachRow1): ?>
+                    <?php foreach($eachRow1->Header->ColData as $eachColData): ?>
+                        <?php if (!empty($eachColData->value)):?>
+                        <div style="clear:both">
+                            <div class="columnDiv extrabig" style="font-weight:bold;"><?php echo $eachColData->value; ?>&nbsp;</div>
+                        </div>
+                        <?php endif;?>
+                    <?php endforeach; ?>
+                    <?php foreach($eachRow1->Rows->Row as $eachRow2): ?>
+                        <?php foreach($eachRow2->Header->ColData as $eachColData): ?>
+                            <?php if (!empty($eachColData->value)):?>
+                            <div style="clear:both">
+                                <div class="columnDiv extrabig" style="font-weight:bold; padding-left: 15px;"><?php echo $eachColData->value; ?>&nbsp;</div>
+                            </div>
+                            <?php endif;?>
+                        <?php endforeach; ?>
+                        <div style="clear:both"></div>
+                        <?php foreach($eachRow2->Rows->Row as $eachRow3): ?>
+                            <?php 
+                            if (isset($eachRow3->Header->ColData)):
+                            foreach($eachRow3->Header->ColData as $eachColData): 
+                            ?>
+                                <?php if (!empty($eachColData->value)):?>
+                                <div style="clear:both">
+                                    <div class="columnDiv extrabig" style="font-weight:bold; padding-left: 30px;"><?php echo $eachColData->value; ?>&nbsp;</div>
+                                </div>
+                                <?php endif;?>
+                            <?php 
+                            endforeach; 
+                            ?>
+
+                            <?php
+                            elseif (isset($eachRow3->ColData)):
+                            foreach($eachRow3->ColData as $eachColData): 
+                            ?>
+                                <?php if (!empty($eachColData->value)):?>
+                                <div>
+                                    <div class="columnDiv extrabig" style="font-weight:bold; padding-left: 30px;"><?php echo $eachColData->value; ?>&nbsp;</div>
+                                </div>
+                                <?php endif;?>
+                            <?php 
+                            endforeach;
+                            endif;
+                            ?>
+                            <div style="clear:both"></div>
+                            
+                            <?php 
+                            if (isset($eachRow3->Rows->Row)):
+                            foreach($eachRow3->Rows->Row as $eachRow4): 
+                            ?>
+                                <?php 
+                                if (isset($eachRow4->ColData)):
+                                foreach($eachRow4->ColData as $eachColData): 
+                                ?>
+                                    <div>
+                                        <div class="columnDiv extrabig" style="font-weight:bold; padding-left: 45px;"><?php echo $eachColData->value; ?>&nbsp;</div>
+                                    </div>
+                                <?php 
+                                endforeach; 
+                                else:
+                                foreach($eachRow4->Header->ColData as $eachColData): 
+                                ?>
+                                    <div>
+                                        <div class="columnDiv extrabig" style="font-weight:bold; padding-left: 45px;"><?php echo $eachColData->value; ?>&nbsp;</div>
+                                    </div>
+                                <?php 
+                                endforeach;
+                                ?>
+                                <div style="clear:both"></div>
+                                <?php
+                                foreach($eachRow4->Rows->Row as $eachRow41): 
+                                    foreach($eachRow41->ColData as $eachColData): 
+                                ?>
+                                    <div>
+                                        <div class="columnDiv extrabig" style="font-weight:bold; padding-left: 60px;"><?php echo $eachColData->value; ?>&nbsp;</div>
+                                    </div>
+                                <?php 
+                                    endforeach;
+                                endforeach;
+                                endif;
+                                ?>
+                                <div style="clear:both"></div>
+                            <?php 
+                            endforeach; 
+                            endif;
+                            ?>
+                                
+                            <?php 
+                            if (isset($eachRow3->Summary->ColData)):
+                            foreach($eachRow3->Summary->ColData as $eachRow5): 
+                            ?>
+                                <?php if (!empty($eachRow5->value)):?>
+                                <div>
+                                    <div class="columnDiv extrabig" style="font-weight:bold; <?php echo is_numeric($eachRow5->value) ? 'padding-left: 45px;border-top: 1px solid grey' : 'padding-left: 30px;';?>"><?php echo $eachRow5->value; ?>&nbsp;</div>
+                                </div>
+                                <?php endif;?>
+                            <?php 
+                            endforeach; 
+                            endif;
+                            ?>
+                            <div style="clear:both"></div>
+                            
+                        <?php endforeach; ?>
+                            
+                        <?php foreach($eachRow2->Summary->ColData as $eachRow6): ?>
+                            <?php if (!empty($eachRow6->value)):?>
+                            <div>
+                                <div class="columnDiv extrabig" style="font-weight:bold; <?php echo is_numeric($eachRow6->value) ? 'padding-left: 45px;border-top: 1px solid grey' : 'padding-left: 15px;';?>"><?php echo $eachRow6->value; ?>&nbsp;</div>
+                            </div>
+                            <?php endif;?>
+                        <?php endforeach; ?>
+                        <div style="clear:both"></div>
+                            
+                    <?php endforeach; ?>
+                        
+                    <?php foreach($eachRow1->Summary->ColData as $eachRow7): ?>
+                        <?php if (!empty($eachRow7->value)):?>
+                        <div>
+                            <div class="columnDiv extrabig" style="font-weight:bold; <?php echo is_numeric($eachRow7->value) ? 'padding-left: 45px;border-top: 1px solid grey' : 'padding-left: 0px;';?>"><?php echo $eachRow7->value; ?>&nbsp;</div>
+                        </div>
+                        <?php endif;?>
+                    <?php endforeach; ?>
+                    <div style="clear:both"></div>    
+                    <br /><br /><br />    
+                <?php endforeach; ?>
+                
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

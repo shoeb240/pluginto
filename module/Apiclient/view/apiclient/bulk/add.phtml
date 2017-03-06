@@ -1,0 +1,58 @@
+<?php
+$title = 'Add Bulk Transaction';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+    .lineBox{
+        float:left;
+        width:140px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="" enctype="multipart/form-data">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">CSV File:</div>
+        <div class="fieldBox">
+            <input type="file" name="csv_file">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">XML File:</div>
+        <div class="fieldBox">
+            <input type="file" name="xml_file">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Starting Row Num:</div>
+        <div class="fieldBox">
+            <input type="text" name="start_row"> <span style="font-size:10px;">(Optional)</span>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Ending Row Num:</div>
+        <div class="fieldBox">
+            <input type="text" name="end_row"> <span style="font-size:10px;">(Optional)</span>
+        </div>
+    </div>
+    <div style="clear:both">&nbsp;</div>
+    
+    <div><input type="submit" value="Submit"></div>
+</form>

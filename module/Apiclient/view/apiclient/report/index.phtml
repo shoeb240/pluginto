@@ -1,0 +1,79 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+.extrabig{
+    width:300px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+
+<?php
+function getDivCol($key, $value, $padding)
+{
+    if ($key != "ColTitle") return;
+    
+    if (!is_array($value)) {
+        echo "<div>
+                <div class=\"columnDiv extrabig\" style=\"border-bottom: 1px solid grey;padding-left:20px;\">" . $value . "&nbsp;</div>
+            </div>";
+    }
+    if (!empty($value)) {
+        echo "<div style=\"clear:both\"></div>";
+    }
+}
+
+function getDiv($key, $value, $padding)
+{
+    if ($key != "value") return;
+    
+    if (!is_array($value)) {
+        echo "<div>
+                <div class=\"columnDiv extrabig\" style=\"" . (is_numeric($value) ? "border-bottom: 1px solid grey;padding-left:20px;" : "padding-left:{$padding};") . "font-weight:bold;\">" . $value . "&nbsp;</div>
+            </div>";
+    }
+    if (is_numeric($value) ||  empty($value)) {
+        echo "<div style=\"clear:both\"></div>";
+    }
+}
+?>
+
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Reports</h3>
+            </div>
+            <div>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <div class="fieldRow">
+                    <div class="labelBox"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'report', 'action' => 'balance-sheet')) ?>">Balance Sheet</a></div>
+                </div>
+                <div class="fieldRow">
+                    <div class="labelBox"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'report', 'action' => 'profit-and-loss')) ?>">Profit And Loss</a></div>
+                </div>
+                <div class="fieldRow">
+                    <div class="labelBox"><a href="<?php echo $this->url('apiclient/default', array('controller' => 'report', 'action' => 'sales-report')) ?>">Transaction Report</a></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

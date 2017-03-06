@@ -1,0 +1,69 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;    
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:200px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>User</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'user', 'action'=>'add'));?>">Add User</a>
+                &nbsp;
+                <a href="<?php echo $this->url('apiclient/default', array('controller' => 'user', 'action'=>'set-logout'));?>">Logout</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($users)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">User Id</div>
+                        <div class="columnDiv small">Vendor</div>
+                        <div class="columnDiv big">User Login</div>
+                        <div class="columnDiv medium">Token Login</div>
+                        <div class="columnDiv big">Check Authentication</div>                        
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($users as $user): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo $user['id']; ?></div>
+                        <div class="columnDiv small"><?php echo $user['accounting_vendor']; ?></div>
+                        <div class="columnDiv big"><?php echo $user['user_login']; ?></div>
+                        <div class="columnDiv medium">
+                            <a href="<?php echo $this->url('apiclient/default', array('controller' => 'user', 'action'=>'login', 'id' => $user['id']));?>">Set Login</a>
+                        </div>
+                        <div class="columnDiv big">
+                            <a href="<?php echo $this->url('apiclient/default', array('controller' => 'user', 'action'=>'check-authentication'));?>">Check Vendor Authentication</a>
+                        </div>
+                        <div class="columnDiv big">
+                            <a href="<?php echo $this->url('apiclient/default', array('controller' => 'user', 'action'=>'check-authentication'));?>">Sync</a>
+                        </div>
+                        <div class="columnDiv big">
+                            <a href="<?php echo $this->url('apiclient/default', array('controller' => 'user', 'action'=>'edit', 'id' => $user['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url('apiclient/default', array('controller' => 'user', 'action'=>'delete', 'id' => $user['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

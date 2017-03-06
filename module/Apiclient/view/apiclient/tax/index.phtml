@@ -1,0 +1,67 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;    
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Tax</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'tax', 'action'=>'add'));?>">Add Tax</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($taxes)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv big">Pluginto Tax Id</div>
+                        <div class="columnDiv big">Tax Code</div>
+                        <div class="columnDiv big">Tax Code Id</div>
+                        <div class="columnDiv big">User Id</div>
+                        <div class="columnDiv big">Tax Rate List</div>
+                </div>
+                <?php 
+                foreach($taxes as $tax): 
+                    $listArr = explode(',', $tax['tax_rate_list']);
+                ?>
+                    <div style="clear:both">
+                        <div class="columnDiv big"><?php echo $tax['id']; ?></div>
+                        <div class="columnDiv big"><?php echo $tax['tax_code']; ?></div>
+                        <div class="columnDiv big"><?php echo $tax['tax_code_id']; ?></div>
+                        <div class="columnDiv big"><?php echo $tax['user_id']; ?></div>
+                        <div class="columnDiv big">
+                            <?php 
+                            foreach($listArr as $k => $li) {
+                                if ($k > 0) echo ', ';
+                                ?>
+                                <a href="<?php echo $this->url(null, array('controller' => 'tax-rate', 'action'=>'view', 'id' => $li));?>"><?php echo $li;?> </a>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

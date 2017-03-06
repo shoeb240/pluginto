@@ -1,0 +1,38 @@
+<?php
+$title = 'Add New Customer';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div  style="clear:both;font-weight: bold;color:red;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+    <div  style="clear:both;font-weight: bold;color:green;">
+        <?php 
+        if (isset($success_msg)) { 
+            echo ($success_msg ? 'Success Message: ' . $success_msg : '');
+        } 
+        ?>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Create Default Elements</div>
+        <div class="fieldBox">&nbsp;</div>
+    </div>
+    <div><input type="submit" value="Create Defaults"></div>
+</form>

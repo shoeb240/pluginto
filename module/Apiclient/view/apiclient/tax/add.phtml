@@ -1,0 +1,169 @@
+<?php
+$title = 'Add New Tax';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+<!--    <div class="fieldRow">
+        <div class="labelBox">User Id:</div>
+        <div class="fieldBox">
+            <select name="user_id">
+                <option value="">Select</option>
+                <?php foreach($users as $user): ?>
+                    <option value="<?php echo $user->getId(); ?>"><?php echo $user->getId() . ' - ' . $user->getUserLogin(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>-->
+    <div class="fieldRow">
+        <div class="labelBox">Tax Code:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="tax_code"></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">&nbsp;</div>
+        <div class="fieldBox">
+            &nbsp;
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">&nbsp;</div>
+        <div class="fieldBox">
+            &nbsp;
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Rate Id:</div>
+        <div class="fieldBox">
+            <select name="tax_rate_id[]">
+                <option value="">Select</option>
+                <?php foreach($taxRates as $taxRate): ?>
+                    <option value="<?php echo $taxRate->getId(); ?>"><?php echo $taxRate->getTaxRateName() . ' - value:' . $taxRate->getRateValue() . ' - uid' . $taxRate->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">OR</div>
+        <div class="fieldBox">
+            &nbsp;
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Rate Name:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="tax_rate_name[]"></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Rate Value:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="rate_value[]"></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Agency Id:</div>
+        <div class="fieldBox">
+            <select name="tax_agency_id[]">
+                <option value="">Select</option>
+                <?php foreach($taxAgencies as $taxAgency): ?>
+                    <option value="<?php echo $taxAgency->getId(); ?>"><?php echo $taxAgency->getDisplayName() . ' - uid' . $taxAgency->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Applicable On:</div>
+        <div class="fieldBox">
+            <select name="tax_applicable_on[]">
+                <option value="">Select</option>
+                <option value="Sales">Sales</option>
+                <option value="Purchase">Purchase</option>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">&nbsp;</div>
+        <div class="fieldBox">
+            &nbsp;
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">&nbsp;</div>
+        <div class="fieldBox">
+            &nbsp;
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Rate Id:</div>
+        <div class="fieldBox">
+            <select name="tax_rate_id[]">
+                <option value="">Select</option>
+                <?php foreach($taxRates as $taxRate): ?>
+                    <option value="<?php echo $taxRate->getId(); ?>"><?php echo $taxRate->getTaxRateName() . ' - value:' . $taxRate->getRateValue() . ' - uid' . $taxRate->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">OR</div>
+        <div class="fieldBox">
+            &nbsp;
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Rate Name:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="tax_rate_name[]"></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Rate Value:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="rate_value[]"></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Agency Id:</div>
+        <div class="fieldBox">
+            <select name="tax_agency_id[]">
+                <option value="">Select</option>
+                <?php foreach($taxAgencies as $taxAgency): ?>
+                    <option value="<?php echo $taxAgency->getId(); ?>"><?php echo $taxAgency->getDisplayName() . ' - uid' . $taxAgency->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Applicable On:</div>
+        <div class="fieldBox">
+            <select name="tax_applicable_on[]">
+                <option value="">Select</option>
+                <option value="Sales">Sales</option>
+                <option value="Purchase">Purchase</option>
+            </select>
+        </div>
+    </div>
+    <div><input type="submit" value="Submit"></div>
+</form>

@@ -1,0 +1,18 @@
+/*----------------------------------------------------------*/
+/*Date & Time : 2015-03-20 15:12:01*/
+/*Log Level: debug*/
+/*Method: fetchAll - \Input\Model\User*/
+/*Response: a:1:{s:4:"data";a:2:{i:0;a:4:{s:2:"id";i:25;s:13:"property_list";s:299:"vendor_api_key=~~vendor_password=~~vendor_company_id=~~_pi_auth_token=~~token=a:2:{s:18:"oauth_token_secret";s:40:"YQHwsDDngc395PxQvIIS0Do8kTbGvuNrlAzbpPLc";s:11:"oauth_token";s:48:"qyprd64cBhlPAZq0yOJ6tQW1pHoYu2qbNjSgY1vWSzvTDd3c";}~~token_exp_date=2015-09-07~~realm_id=401740016~~data_source=QBO~~";s:17:"accounting_vendor";s:2:"Qb";s:10:"user_login";s:20:"shoeb00010@gmail.com";}i:1;a:4:{s:2:"id";i:26;s:13:"property_list";s:112:"vendor_api_key={28FBCB45-262C-4F55-9035-CCD4847AB4BF}~~vendor_password=AS!@34gdh_/"}~~vendor_company_id=116410~~";s:17:"accounting_vendor";s:4:"Sage";s:10:"user_login";s:17:"shoeb56@gmail.com";}}}*/
+/*----------------------------------------------------------*/
+/*Date & Time : 2015-03-20 15:12:07*/
+/*Log Level: debug*/
+/*Method: fetchAll - \Input\Model\Customer*/
+/*User Id: 25*/
+/*Response: a:1:{s:4:"data";a:1:{i:0;a:13:{s:2:"id";i:32;s:18:"vendor_customer_id";s:1:"1";s:7:"user_id";s:2:"25";s:13:"customer_name";N;s:12:"display_name";s:17:"DisplayName200025";s:4:"name";s:10:"Name200025";s:7:"surname";s:13:"Surname200025";s:8:"address1";s:10:"Addr200025";s:8:"address2";s:11:"Addr2200025";s:4:"city";s:11:"City2000025";s:8:"postcode";s:15:"postcode2000025";s:7:"country";s:14:"Country2000025";s:10:"sync_token";s:1:"0";}}}*/
+/*----------------------------------------------------------*/
+/*Date & Time : 2015-03-20 15:14:19*/
+/*Log Level: debug*/
+/*Method: createEntity - \Input\Model\Customer*/
+/*User Id: 25*/
+/*Request Data: a:9:{s:13:"customer_name";s:17:"CustomerName00026";s:12:"display_name";s:17:"DisplayName200026";s:4:"name";s:10:"Name200026";s:7:"surname";s:13:"Surname200026";s:8:"address1";s:10:"Addr200026";s:8:"address2";s:11:"Addr2200026";s:4:"city";s:11:"City2000026";s:8:"postcode";s:15:"postcode2000026";s:7:"country";s:14:"Country2000026";}*/
+/*Response: a:1:{s:4:"data";a:13:{s:2:"id";i:33;s:18:"vendor_customer_id";s:1:"2";s:7:"user_id";s:2:"25";s:13:"customer_name";N;s:12:"display_name";s:17:"DisplayName200026";s:4:"name";s:10:"Name200026";s:7:"surname";s:13:"Surname200026";s:8:"address1";s:10:"Addr200026";s:8:"address2";s:11:"Addr2200026";s:4:"city";s:11:"City2000026";s:8:"postcode";s:15:"postcode2000026";s:7:"country";s:14:"Country2000026";s:10:"sync_token";s:1:"0";}}*/

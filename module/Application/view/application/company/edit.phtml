@@ -1,0 +1,57 @@
+<?php
+$title = 'Edit Company';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post">
+    <div class="fieldRow">
+        <div class="labelBox">Vat Id:</div>
+        <div class="fieldBox"><input type="text" name="vat_id" value="<?php echo $company->getVatId(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Company Name:</div>
+        <div class="fieldBox"><input type="text" name="company_name" value="<?php echo $company->getCompanyName(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Display Name:</div>
+        <div class="fieldBox"><input type="text" name="display_name" value="<?php echo $company->getDisplayName(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Name:</div>
+        <div class="fieldBox"><input type="text" name="name" value="<?php echo $company->getName(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Surname:</div>
+        <div class="fieldBox"><input type="text" name="surname" value="<?php echo $company->getSurname(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Address:</div>
+        <div class="fieldBox"><input type="text" name="address" value="<?php echo $company->getAddress(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">City:</div>
+        <div class="fieldBox"><input type="text" name="city" value="<?php echo $company->getCity(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Postcode:</div>
+        <div class="fieldBox"><input type="text" name="postcode" value="<?php echo $company->getPostcode(); ?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Country:</div>
+        <div class="fieldBox"><input type="text" name="country" value="<?php echo $company->getCountry(); ?>"></div>
+    </div>
+
+	<input type="submit" value="Submit">
+</form>

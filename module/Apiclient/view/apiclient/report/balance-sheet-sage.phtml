@@ -1,0 +1,203 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+.extrabig{
+    width:350px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+
+<?php
+$GLOBALS['prevLevel'] = 1;
+$GLOBALS['currLevel'] = 1;
+$GLOBALS['latest_type'] = 'Row';
+
+function getDivCol($key, $value, $padding)
+{
+    if ($key == "Summary") $GLOBALS['latest_type'] = $key;
+    else if ($key == "Row") $GLOBALS['latest_type'] = $key;
+    if ($key != "ColTitle") return;
+    
+    if (!is_array($value)) {
+        echo "<div>
+                <div class=\"columnDiv extrabig\" style=\"border-bottom: 1px solid grey;\">" . $value . "&nbsp;</div>
+            </div>";
+    }
+    if (!empty($value)) {
+        echo "<div style=\"clear:both\"></div>";
+    }
+}
+
+function getDiv($key, $value, $padding)
+{
+    if ($key == "Summary") $GLOBALS['latest_type'] = $key;
+    else if ($key == "Row") $GLOBALS['latest_type'] = $key;
+    if ($key != "value") return;
+    
+    $boldCss = '';
+    $dollar = '';
+    if ($GLOBALS['prevLevel'] >= $GLOBALS['currLevel'] && $GLOBALS['latest_type'] == 'Summary') {
+        $boldCss = "border-top: 1px solid grey;font-weight:bold;";
+        $dollar = '$';
+    }
+
+    if (!is_array($value)) {
+        if (is_numeric($value)) {
+            echo "<div>
+                    <div class=\"columnDiv medium\" style=\"padding-left:20px;{$boldCss}\">" . $dollar . $value . "&nbsp;</div>
+                </div>";
+            $GLOBALS['prevLevel'] = $GLOBALS['currLevel'];        
+        } else {
+            echo "<div>
+                    <div class=\"columnDiv extrabig\" style=\"padding-left:{$padding};font-weight:bold;\">" . $value . "&nbsp;</div>
+                </div>";
+        }
+    }
+    if (is_numeric($value) ||  empty($value)) {
+        echo "<div style=\"clear:both\"></div>";
+    }
+}
+?>
+
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Balance Sheet</h3>
+                <h5>As of <?php echo date("F j,Y");?></h5>
+            </div>
+            <div>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php 
+                if (isset($reports['Columns'])) {
+                    foreach($reports['Columns'] as $key1 => $each1) {
+                        $padding = '10px';
+                        getDivCol($key1, $each1, $padding);
+                        foreach($each1 as $key2 => $each2) {
+                            $padding = '20px';
+                            getDivCol($key2, $each2, $padding);
+                            foreach($each2 as $key3 => $each3) {
+                                $padding = '30px';
+                                getDivCol($key3, $each3, $padding);
+                                foreach($each3 as $key4 => $each4) {
+                                    $padding = '40px';
+                                    getDivCol($key4, $each4, $padding);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
+                
+                if (isset($reports['Rows'])) {
+                    foreach($reports['Rows'] as $key1 => $each1) {
+                        $padding = '10px';
+                        $GLOBALS['currLevel'] = 1;
+                        getDiv($key1, $each1, $padding);
+                        foreach($each1 as $key2 => $each2) {
+                            $padding = '20px';
+                            $GLOBALS['currLevel'] = 2;
+                            getDiv($key2, $each2, $padding);
+                            foreach($each2 as $key3 => $each3) {
+                                $padding = '30px';
+                                $GLOBALS['currLevel'] = 3;
+                                getDiv($key3, $each3, $padding);
+                                foreach($each3 as $key4 => $each4) {
+                                    $padding = '40px';
+                                    $GLOBALS['currLevel'] = 4;
+                                    getDiv($key4, $each4, $padding);
+                                    foreach($each4 as $key5 => $each5) {
+                                        $padding = '50px';
+                                        $GLOBALS['currLevel'] = 5;
+                                        getDiv($key5, $each5, $padding);
+                                        foreach($each5 as $key6 => $each6) {
+                                            $padding = '60px';
+                                            $GLOBALS['currLevel'] = 6;
+                                            getDiv($key6, $each6, $padding);
+                                            foreach($each6 as $key7 => $each7) {
+                                                $padding = '70px';
+                                                $GLOBALS['currLevel'] = 7;
+                                                getDiv($key7, $each7, $padding);
+                                                foreach($each7 as $key8 => $each8) {
+                                                    $padding = '80px';
+                                                    $GLOBALS['currLevel'] = 8;
+                                                    getDiv($key8, $each8, $padding);
+                                                    foreach($each8 as $key9 => $each9) {
+                                                        $padding = '90px';
+                                                        $GLOBALS['currLevel'] = 9;
+                                                        getDiv($key9, $each9, $padding);
+                                                        foreach($each9 as $key10 => $each10) {
+                                                            $padding = '100px';
+                                                            $GLOBALS['currLevel'] = 10;
+                                                            getDiv($key10, $each10, $padding);
+                                                            foreach($each10 as $key11 => $each11) {
+                                                                $padding = '110px';
+                                                                $GLOBALS['currLevel'] = 11;
+                                                                getDiv($key11, $each11, $padding);
+                                                                foreach($each11 as $key12 => $each12) {
+                                                                    $padding = '120px';
+                                                                    $GLOBALS['currLevel'] = 12;
+                                                                    getDiv($key12, $each12, $padding);
+                                                                    foreach($each12 as $key13 => $each13) {
+                                                                        $padding = '130px';
+                                                                        $GLOBALS['currLevel'] = 13;
+                                                                        getDiv($key13, $each13, $padding);
+                                                                        foreach($each13 as $key14 => $each14) {
+                                                                            $padding = '140px';
+                                                                            $GLOBALS['currLevel'] = 14;
+                                                                            getDiv($key14, $each14, $padding);
+                                                                            foreach($each14 as $key15 => $each15) {
+                                                                                $padding = '150px';
+                                                                                $GLOBALS['currLevel'] = 15;
+                                                                                getDiv($key15, $each15, $padding);
+                                                                                foreach($each15 as $key16 => $each16) {
+                                                                                    $padding = '150px';
+                                                                                    $GLOBALS['currLevel'] = 16;
+                                                                                    getDiv($key16, $each16, $padding);
+                                                                                    foreach($each16 as $key17 => $each17) {
+                                                                                        $padding = '170px';
+                                                                                        $GLOBALS['currLevel'] = 17;
+                                                                                        getDiv($key17, $each17, $padding);
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

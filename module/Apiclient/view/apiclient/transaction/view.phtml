@@ -1,0 +1,109 @@
+<?php
+$title = 'View QBO Accounting Transaction';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+        clear:both;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+    .big_div{
+        float:left; 
+        width: 200px;
+    }
+    .small_div{
+        float:left; 
+        width: 100px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<div  style="clear:both;font-weight: bold;">
+    <?php 
+    if (isset($error_msg)) { 
+        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+    } 
+    ?>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Id:</div>
+    <div class="fieldBox">
+        <?php echo $transaction['id']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Customer Id:</div>
+    <div class="fieldBox">
+        <?php echo $transaction['customer_id']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Supplier Id:</div>
+    <div class="fieldBox">
+        <?php echo $transaction['supplier_id']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Tax Id:</div>
+    <div class="fieldBox">
+        <?php echo $transaction['tax_id']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Currency:</div>
+    <div class="fieldBox">
+        <?php echo $transaction['currency']; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Payment Made:</div>
+    <div class="fieldBox">
+        <?php echo $transaction['payment_made'] ? 'Yes' : 'No'; ?>&nbsp;
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="labelBox">Payment Type:</div>
+    <div class="fieldBox">
+        <?php echo $transaction['payment_type']; ?>&nbsp;
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="fieldRow">
+    <div class="fieldBox">
+        <div class="small_div">Id</div>
+        <div class="small_div">Item Id</div>
+        <div class="small_div">Account Id</div>
+        <div class="big_div">Description</div>
+        <div class="small_div">Quantity</div>
+        <div class="small_div">Unit Price</div>
+        <div class="small_div">Tax<br /> Percentage</div>
+        <div class="small_div">Tax</div>
+        <div class="small_div">Discount<br /> Percentage</div>
+        <div class="small_div">Discount</div>
+    </div>
+</div>
+<?php foreach($transaction['Line'] as $line):?>
+<div class="fieldRow">
+    <div class="fieldBox">
+        <div class="small_div"><?php echo $line['id']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['item_id']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['account_id']; ?>&nbsp;</div>
+        <div class="big_div"><?php echo $line['description']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['quantity']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['unit_price']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['tax_percentage']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['tax']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['discount_percentage']; ?>&nbsp;</div>
+        <div class="small_div"><?php echo $line['discount']; ?>&nbsp;</div>
+    </div>
+</div>
+<?php endforeach;?>
+<div style="clear:both;"></div>

@@ -1,0 +1,62 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Company</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url('application/default', array('controller' => 'company', 'action'=>'add'));?>">Add Company</a>
+
+                <?php if ($companies) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Id</div>
+                        <div class="columnDiv small">Vat Id</div>
+                        <div class="columnDiv big">Company Name</div>
+                        <div class="columnDiv big">Display Name</div>
+                        <div class="columnDiv medium">Name</div>
+                        <div class="columnDiv medium">Surname</div>
+                        <div class="columnDiv big">Address</div>
+                        <div class="columnDiv medium">City</div>
+                        <div class="columnDiv medium">Postcode</div>
+                        <div class="columnDiv medium">Country</div>
+                        <div class="columnDiv big"></div>
+                </div>
+                <?php foreach($companies as $company): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo $company->getId(); ?></div>
+                        <div class="columnDiv small"><?php echo $company->getVatId(); ?></div>
+                        <div class="columnDiv big"><?php echo $company->getCompanyName(); ?></div>
+                        <div class="columnDiv big"><?php echo $company->getDisplayName(); ?></div>
+                        <div class="columnDiv medium"><?php echo $company->getName(); ?></div>
+                        <div class="columnDiv medium"><?php echo $company->getSurname(); ?></div>
+                        <div class="columnDiv big"><?php echo $company->getAddress(); ?></div>
+                        <div class="columnDiv medium"><?php echo $company->getCity(); ?></div>
+                        <div class="columnDiv medium"><?php echo $company->getPostcode(); ?></div>
+                        <div class="columnDiv medium"><?php echo $company->getCountry(); ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url('application/default', array('controller' => 'company', 'action'=>'edit', 'id' => $company->getId()));?>">Edit</a> |
+                            <a href="<?php echo $this->url('application/default', array('controller' => 'company', 'action'=>'delete', 'id' => $company->getId()));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

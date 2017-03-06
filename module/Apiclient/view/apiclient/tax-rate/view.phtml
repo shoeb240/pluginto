@@ -1,0 +1,54 @@
+<?php
+$title = 'View Tax Rate';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div class="fieldRow">
+        <div class="labelBox">Pluginto TaxRate Id:</div>
+        <div class="fieldBox"><?php echo $taxRate['id'];?></div>
+    </div>
+
+    <div class="fieldRow">
+        <div class="labelBox">Tax Rate Name:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><?php echo $taxRate['tax_rate_name'];?></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Rate Id:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><?php echo $taxRate['tax_rate_id'];?></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Rate Value:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><?php echo $taxRate['rate_value'];?></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Agency Id:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><?php echo $taxRate['tax_agency_id'];?></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Applicable On:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><?php echo $taxRate['tax_applicable_on'];?></div>
+        </div>
+    </div>
+</form>

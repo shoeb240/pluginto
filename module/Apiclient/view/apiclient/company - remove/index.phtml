@@ -1,0 +1,64 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Company</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'company', 'action'=>'add'));?>">Add Company</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($companies)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Pluginto Company Id</div>
+                        <div class="columnDiv small">Vendor Company Id</div>
+                        <div class="columnDiv small">User Id</div>
+                        <div class="columnDiv big">Company Name</div>
+                        <div class="columnDiv big">Name</div>
+                        <div class="columnDiv big">Surname</div>
+                        <div class="columnDiv big">Company Type</div>
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($companies as $company): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo $company['id']; ?></div>
+                        <div class="columnDiv small"><?php echo $company['vendor_company_id']; ?></div>
+                        <div class="columnDiv small"><?php echo $company['user_id']; ?></div>
+                        <div class="columnDiv big"><?php echo $company['company_name']; ?></div>
+                        <div class="columnDiv big"><?php echo $company['display_name']; ?></div>
+                        <div class="columnDiv big"><?php echo $company['name']; ?></div>
+                        <div class="columnDiv big"><?php echo $company['surname']; ?></div>
+                        <div class="columnDiv big"><?php echo $company['company_type']; ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url(null, array('controller' => 'company', 'action'=>'edit', 'id' => $company['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url(null, array('controller' => 'company', 'action'=>'delete', 'id' => $company['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

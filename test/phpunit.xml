@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<phpunit
+    bootstrap="./phpunit_bootstrap.php"
+    strict="true"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    colors="false"
+    verbose="true"
+    >
+
+    <testsuites>
+	<testsuite name="Input">
+    	    <directory>../module/Input/test</directory>
+	</testsuite>
+	<testsuite name="Application">
+    	    <directory>../module/Application/test</directory>
+	</testsuite>
+	<testsuite name="Apiclient">
+    	    <directory>../module/Apiclient/test</directory>
+	</testsuite>
+	<testsuite name="Output">
+    	    <directory>../module/Output/test</directory>
+	</testsuite>
+	
+
+    </testsuites>
+
+
+</phpunit>
+

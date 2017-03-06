@@ -1,0 +1,64 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Bank Account</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'bank-account', 'action'=>'add'));?>">Add Bank Account</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($bankAccounts)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Pluginto Bank Account Id</div>
+                        <div class="columnDiv small">Vendor Bank Account Id</div>
+                        <div class="columnDiv small">User Id</div>
+                        <div class="columnDiv big">Account Name</div>
+                        <div class="columnDiv big">Account Number</div>
+                        <div class="columnDiv big">Bank Name</div>
+                        <div class="columnDiv big">Branch Name</div>
+                        <div class="columnDiv big">&nbsp;</div>
+                </div>
+                <?php foreach($bankAccounts as $bankAccount): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo !empty($bankAccount['id']) ? $bankAccount['id'] : ''; ?></div>
+                        <div class="columnDiv small"><?php echo $bankAccount['vendor_bank_account_id']; ?></div>
+                        <div class="columnDiv small"><?php echo !empty($bankAccount['user_id']) ? $bankAccount['user_id'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $bankAccount['account_name']; ?></div>
+                        <div class="columnDiv big"><?php echo !empty($bankAccount['account_number']) ? $bankAccount['account_number'] : ''; ?></div>
+                        <div class="columnDiv big"><?php echo $bankAccount['bank_name']; ?></div>
+                        <div class="columnDiv big"><?php echo $bankAccount['branch_name']; ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url(null, array('controller' => 'bank-account', 'action'=>'edit', 'id' => $bankAccount['id']));?>">Edit</a> |
+                            <a href="<?php echo $this->url(null, array('controller' => 'bank-account', 'action'=>'delete', 'id' => $bankAccount['id']));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

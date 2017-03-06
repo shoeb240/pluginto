@@ -1,0 +1,231 @@
+<?php
+$title = 'Add Bulk Transaction';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+    .lineBox{
+        float:left;
+        width:140px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox"><b>Pluginto Parameter</b></div>
+        <div class="fieldBox"><b>File Field</b></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Customer Name:</div>
+        <div class="fieldBox">
+            <input type="text" name="customer_name">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Supplier Name:</div>
+        <div class="fieldBox">
+            <input type="text" name="supplier_name">
+        </div>
+    </div>
+    <?php
+    if ($accountingVendor == 'Sage') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Amount:</div>
+        <div class="fieldBox">
+            <input type="text" name="amount"> <span style="font-size:10px;">(For Sage SalesReceipt, Purchase)</span>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Description:</div>
+        <div class="fieldBox">
+            <input type="text" name="transaction_description"> <span style="font-size:10px;">(For Sage SalesReceipt, Purchase)</span>
+        </div>
+    </div>
+    <?php
+    }
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Currency:</div>
+        <div class="fieldBox">
+            <input type="text"  name="currency">
+            <select  name="currency">
+                <option value="">Select</option>
+                <option value="USD">USD</option>
+                <option value="EURO">EURO</option>
+            </select>
+        </div>
+    </div>
+    <?php
+    if ($accountingVendor == 'Qb') {
+    ?>
+<!--    <div class="fieldRow">
+        <div class="labelBox">Tax Id:</div>
+        <div class="fieldBox">
+            <input type="text"  name="tax_id"> <span style="font-size:10px;">(For Qb)</span>
+        </div>
+    </div>-->
+    <?php
+    }
+    ?>
+    <?php
+    if ($accountingVendor == 'Qb') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Account Name Financial:</div>
+        <div class="fieldBox">
+            <input type="text"  name="account_name_financial"> <span style="font-size:10px;">(For Qb Purchase)</span>
+        </div>
+    </div>
+    <?php
+    } else if ($accountingVendor == 'Sage') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Bank Name Account:</div>
+        <div class="fieldBox">
+            <input type="text"  name="bank_name"> <span style="font-size:10px;">(For Sage SalesReceipt, Purchase)</span>
+        </div>
+    </div>
+    <?php
+    }
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Payment Made:</div>
+        <div class="fieldBox">
+            <input type="text"  name="payment_made">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Payment Type:</div>
+        <div class="fieldBox">
+            <input type="text"  name="payment_type">
+        </div>
+    </div>
+    <div style="clear:both">
+<!--        <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+        Sage: Not For Sage SalesReceipt, Purchase. Item or Account anyone can be selected for Invoice and Bill.
+        <br />
+        Qb: Item for Invoice and SalesReceipt, Account for Invoice and SalesReceipt-->
+    </div>
+    <br />
+    <div class="fieldRow">
+        <div class="labelBox">Account Name:</div>
+        <div class="fieldBox">
+            <input type="text"  name="account_name">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Account Category:</div>
+        <div class="fieldBox">
+            <input type="text"  name="account_category">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Account Subcategory:</div>
+        <div class="fieldBox">
+            <input type="text"  name="account_subcategory">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Item Name:</div>
+        <div class="fieldBox">
+            <input type="text" name="item_name">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Description:</div>
+        <div class="fieldBox">
+            <input type="text" name="description">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Quantity:</div>
+        <div class="fieldBox">
+            <input type="text" name="quantity">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Unit Price:</div>
+        <div class="fieldBox">
+            <input type="text" name="unit_price">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Transaction Date:</div>
+        <div class="fieldBox">
+            <input type="text" name="txn_date">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Due Date:</div>
+        <div class="fieldBox">
+            <input type="text" name="due_date">
+        </div>
+    </div>
+    
+    <?php
+    if ($accountingVendor == 'Sage') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Percentage:</div>
+        <div class="fieldBox">
+            <input type="text" name="tax_percentage">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Discount Percentage:</div>
+        <div class="fieldBox">
+            <input type="text" name="discount_percentage">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax:</div>
+        <div class="fieldBox">
+            <input type="text"  name="tax" style="width:140px;">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Discount:</div>
+        <div class="fieldBox">
+            <input type="text" name="discount">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Amount:</div>
+        <div class="fieldBox">
+            <input type="text" name="tax_amount_total">
+        </div>
+    </div>
+    
+    <?php
+    }
+    ?>
+    
+    <div class="fieldRow">
+        <div class="labelBox">Discount Percentage:</div>
+        <div class="fieldBox">
+            <input type="text" name="discount_percent_total">
+        </div>
+    </div>
+    
+    <div style="clear:both">&nbsp;</div>
+    
+    <div><input type="submit" value="Submit"></div>
+</form>

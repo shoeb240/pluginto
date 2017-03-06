@@ -1,0 +1,31 @@
+<?php
+$title = 'My Connect Page';
+$this->headTitle($title);
+
+$this->HeadScript()->appendFile('https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js','text/javascript');
+
+$this->inlineScript()->captureStart();
+echo <<<JS
+    // Runnable uses dynamic URLs so we need to detect our current //
+    // URL to set the grantUrl value   ########################### //
+    /*######*/ var parser = document.createElement('a');/*#########*/
+    /*######*/parser.href = document.url;/*########################*/
+    // end runnable specific code snipit ##########################//
+    intuit.ipp.anywhere.setup({
+        menuProxy: '',
+        grantUrl: location.protocol+"//"+location.host+"/qb/oauth"
+    });
+JS;
+$this->inlineScript()->captureEnd();
+
+echo $this->doctype();
+?>
+<?php
+if (empty($data) && is_null($token)) {
+    echo "<h3>You are currently not authenticated in QB</h3>";
+} else {
+    var_dump($data);
+}
+?>
+<!-- print connect to QuickBooks button to the page -->
+<ipp:connectToIntuit></ipp:connectToIntuit><br />

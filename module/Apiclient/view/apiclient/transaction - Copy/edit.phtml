@@ -1,0 +1,79 @@
+<?php
+$title = 'Edit Transaction';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Company Id:</div>
+        <div class="fieldBox">
+            <select name="company_id">
+                <option value="">Select</option>
+                <?php foreach($companies as $company): ?>
+                    <option value="<?php echo $company->getId(); ?>" <?php if ($company->getId() == $transaction['company_id']) echo 'selected="selected"'?>><?php echo $company->getCompanyName() . ' (' . $company->getCompanyType() . ') - uid' . $company->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Description:</div>
+        <div class="fieldBox"><input type="text" name="description" value="<?php echo $transaction['description'];?>"></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Account Id:</div>
+        <div class="fieldBox">
+            <select name="account_id">
+                <option value="">Select</option>
+                <?php foreach($accounts as $account): ?>
+                    <option value="<?php echo $account->getId(); ?>" <?php if ($account->getId() == $transaction['account_id']) echo 'selected="selected"'?>><?php echo $account->getName() . ' (' . $account->getAccountType() . ') - uid' . $account->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Amount:</div>
+        <div class="fieldBox"><input type="text" name="amount" value="<?php echo $transaction['amount'];?>"> <span style="font-size:10px;">(Positive amount is Sale and negetive amount is Purchase)</span></div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Currency:</div>
+        <div class="fieldBox">
+            <select name="currency">
+                <option value="USD" <?php if ('USD' == $transaction['currency']) echo 'selected="selected"'?>>USD</option>
+                <option value="EURO" <?php if ('EURO' == $transaction['currency']) echo 'selected="selected"'?>>EURO</option>
+            </select>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Tax Id:</div>
+        <div class="fieldBox">
+            <select name="tax_id">
+                <option value="">Select</option>
+                <?php foreach($taxes as $tax): ?>
+                    <option value="<?php echo $tax->getId(); ?>" <?php if ($tax->getId() == $transaction['tax_id']) echo 'selected="selected"'?>><?php echo $tax->getTaxCode() . ' - uid' . $tax->getUserId(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+	<input type="submit" value="Submit">
+</form>

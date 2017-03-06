@@ -1,0 +1,75 @@
+<?php
+$title = 'Edit Item';
+$this->headTitle($title);
+?>
+<?php $this->headStyle()->captureStart() ?>
+    .fieldRow{
+        margin:3px;
+    }
+    .labelBox{
+        width:200px;
+        float:left;
+    }
+    .fieldBox{
+        margin:3px;
+    }
+<?php $this->headStyle()->captureEnd() ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form method="post" action="">
+    <div  style="clear:both;font-weight: bold;">
+        <?php 
+        if (isset($error_msg)) { 
+            echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+            echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+        } 
+        ?>
+    </div>
+
+    <div class="fieldRow">
+        <div class="labelBox">Item Name:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="item_name" value="<?php echo $item['item_name'];?>"></div>
+        </div>
+    </div>
+    <?php
+    if ($accountingVendor == 'Qb') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Item Type:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="item_type" value="<?php echo $item['item_type'];?>"><span style="font-size:10px;">(For Qb)</span></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Income Account Id:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="income_account_id" value="<?php echo $item['income_account_id'];?>"><span style="font-size:10px;">(For Qb)</span></div>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="labelBox">Expense Account Id:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="expense_account_id" value="<?php echo $item['expense_account_id'];?>"><span style="font-size:10px;">(For Qb)</span></div>
+        </div>
+    </div>
+    <?php
+    } else if ($accountingVendor == 'Sage') {
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Description:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="description" value="<?php echo $item['description'];?>"><span style="font-size:10px;">(For Sage)</span></div>
+        </div>
+    </div>
+    <?php
+    }
+    ?>
+    <div class="fieldRow">
+        <div class="labelBox">Price:</div>
+        <div class="fieldBox">
+            <div class="fieldBox"><input type="text" name="price" value="<?php echo $item['price'];?>"></div>
+        </div>
+    </div>
+    <input type="hidden" name="user_id" value="<?php echo $item['user_id'];?>">
+    <input type="submit" value="Submit">
+</form>

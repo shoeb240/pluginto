@@ -1,0 +1,56 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Transaction</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url('application/default', array('controller' => 'transaction', 'action' => 'add'));?>">Add Transaction</a>
+
+                <?php if ($transactions) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv small">Id</div>
+                        <div class="columnDiv big">Company Id</div>
+                        <div class="columnDiv big">Account Id</div>
+                        <div class="columnDiv medium">Amount</div>
+                        <div class="columnDiv medium">Currency</div>
+                        <div class="columnDiv big">Tax Id</div>
+                        <div class="columnDiv big">Date</div>
+                        <div class="columnDiv big"></div>
+                </div>
+                <?php foreach($transactions as $transaction): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv small"><?php echo $transaction->getId(); ?></div>
+                        <div class="columnDiv big"><?php echo $transaction->getCompanyId(); ?></div>
+                        <div class="columnDiv big"><?php echo $transaction->getAccountId(); ?></div>
+                        <div class="columnDiv medium"><?php echo $transaction->getAmount()->getValue(); ?></div>
+                        <div class="columnDiv medium"><?php echo $transaction->getAmount()->getCurrency(); ?></div>
+                        <div class="columnDiv big"><?php echo $transaction->getTaxId(); ?></div>
+                        <div class="columnDiv big"><?php echo $transaction->getDatetime()->format('Y-m-d i:s'); ?></div>
+                        <div class="columnDiv">
+                            <a href="<?php echo $this->url('application/default', array('controller' => 'transaction', 'action'=>'edit', 'id' => $transaction->getId()));?>">Edit</a> |
+                            <a href="<?php echo $this->url('application/default', array('controller' => 'transaction', 'action'=>'delete', 'id' => $transaction->getId()));?>">Delete</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>

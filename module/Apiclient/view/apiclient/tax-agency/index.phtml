@@ -1,0 +1,53 @@
+<?php $this->headStyle()->captureStart() ?>
+.columnDiv{
+    float:left;
+    margin:3px;
+    font-size: 12px;
+}
+.small{
+    width:50px;
+}
+.medium{
+    width:100px;
+}
+.big{
+    width:150px;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Tax Agency</h3>
+            </div>
+            <div>
+                <a href="<?php echo $this->url(null, array('controller' => 'tax-agency', 'action'=>'add'));?>">Add Tax Agency</a>
+                <div  style="clear:both;font-weight: bold;">
+                    <?php 
+                    if (isset($error_msg)) { 
+                        echo ($error_code ? 'Error code: ' . $error_code . '<br /> ' : '');
+                        echo ($error_msg ? 'Error Message: ' . $error_msg : '');
+                    } 
+                    ?>
+                </div>
+                <?php if (isset($companies)) : ?>
+                <div  style="clear:both;font-weight: bold;">
+                        <div class="columnDiv big">Pluginto Tax Agency Id</div>
+                        <div class="columnDiv big">Tax Agency Id</div>
+                        <div class="columnDiv big">User Id</div>
+                        <div class="columnDiv big">Display Name</div>
+                </div>
+                <?php foreach($companies as $taxAgency): ?>
+                    <div style="clear:both">
+                        <div class="columnDiv big"><?php echo $taxAgency['id']; ?></div>
+                        <div class="columnDiv big"><?php echo $taxAgency['tax_agency_id']; ?></div>
+                        <div class="columnDiv big"><?php echo $taxAgency['user_id']; ?></div>
+                        <div class="columnDiv big"><?php echo $taxAgency['display_name']; ?></div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>
